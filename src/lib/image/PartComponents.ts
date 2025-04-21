@@ -11,24 +11,30 @@ type BaseImageKey = 'Pants'
 
 export class ImagePartLoader {
 
-    LeftArmImage?: JimpInstance //w2h3
-    RightArmImage?: JimpInstance //w2h3
-    PantsImage?: JimpInstance //w3h2
-    LeftLegImage?: JimpInstance //w3h2
-    RightLegImage?: JimpInstance //w3h2
+    LeftArmImage: SpriteMap
+    RightArmImage: SpriteMap
+    PantsImage: SpriteMap
+    LeftLegImage: SpriteMap
+    RightLegImage: SpriteMap
 
-    static spriteSize = 8
+    constructor() {
+        this.LeftArmImage = new SpriteMap(leftArm, 2, 3)
+        this.RightArmImage = new SpriteMap(rightArm, 2, 3)
+        this.LeftLegImage = new SpriteMap(leftLeg, 3, 2)
+        this.RightLegImage = new SpriteMap(rightLeg, 3, 2)
+        this.PantsImage = new SpriteMap(pants, 3, 2)
+    }
 
     async loadImages() {
         const promises = [
-            async () => { this.LeftArmImage = await Jimp.read(leftArm) as JimpInstance },
-            async () => { this.RightArmImage = await Jimp.read(rightArm) as JimpInstance },
-            async () => { this.LeftLegImage = await Jimp.read(leftLeg) as JimpInstance },
-            async () => { this.RightLegImage = await Jimp.read(rightLeg) as JimpInstance },
-            async () => { this.PantsImage = await Jimp.read(pants) as JimpInstance },
+            this.LeftArmImage.loadImage(),
+            this.RightArmImage.loadImage(),
+            this.LeftLegImage.loadImage(),
+            this.RightLegImage.loadImage(),
+            this.PantsImage.loadImage(),
         ]
 
-        return Promise.all( promises.map( p => p.call(this) ) )
+        return Promise.all( promises )
     }
 
     /**
@@ -39,41 +45,56 @@ export class ImagePartLoader {
      * @returns A ``JimpInstance`` with the cropped part that is desired. May be blank if the coordenates were sent incorrectly
      */
     getCroppedPart( baseImageKey: BaseImageKey, xPos: number, yPos: number ): JimpInstance {
-        const { spriteSize } = ImagePartLoader
-        let x: number, y: number, w: number, h: number
         switch (baseImageKey) {
             case 'LeftArm':
-                x = 2 * spriteSize * xPos
-                y = 3 * spriteSize * yPos
-                w = 2 * spriteSize
-                h = 3 * spriteSize
-                console.dir({ x, y, w, h })
-                return this.LeftArmImage!.crop({ h, w, x, y }) as JimpInstance
+                return this.LeftArmImage.getCroppedPart(xPos, yPos)
             case 'RightArm':
-                x = 2 * spriteSize * xPos
-                y = 3 * spriteSize * yPos
-                w = 2 * spriteSize
-                h = 3 * spriteSize
-                return this.RightArmImage!.crop({ h, w, x, y }) as JimpInstance
+                return this.RightArmImage.getCroppedPart(xPos, yPos)
             case 'LeftLeg':
-                x = 3 * spriteSize * xPos
-                y = 2 * spriteSize * yPos
-                w = 3 * spriteSize
-                h = 2 * spriteSize
-                return this.LeftLegImage!.crop({ h, w, x, y }) as JimpInstance
+                return this.LeftLegImage.getCroppedPart(xPos, yPos)
             case 'RightLeg':
-                x = 3 * spriteSize * xPos
-                y = 2 * spriteSize * yPos
-                w = 3 * spriteSize
-                h = 2 * spriteSize
-                return this.RightLegImage!.crop({ h, w, x, y }) as JimpInstance
+                return this.RightLegImage.getCroppedPart(xPos, yPos)
             case "Pants":
-                x = 3 * spriteSize * xPos
-                y = 2 * spriteSize * yPos
-                w = 3 * spriteSize
-                h = 2 * spriteSize
-                return this.PantsImage!.crop({ h, w, x, y }) as JimpInstance
+                return this.PantsImage.getCroppedPart(xPos, yPos)
         }
     }
 
+}
+
+// Each map is designed around 8x8 sprites
+const SPRITE_SIZE = 8
+
+class SpriteMap {
+    private _spriteMap?: JimpInstance
+    private url: string
+    private width: number
+    private height: number
+
+    /**
+     * 
+     * @param url URL of sprite map
+     * @param width how many 8x8 squares wide is each sprite
+     * @param height how many 8x8 squares high is each sprite
+     */
+    constructor( url: string, width: number, height: number ) {
+        this.url = url
+        this.width = width
+        this.height = height
+    }
+
+    public get spriteMap() : JimpInstance {
+        return this._spriteMap!
+    }
+
+    public async loadImage() {
+        this._spriteMap = await Jimp.read(this.url) as JimpInstance
+    }
+
+    public getCroppedPart(xPos: number, yPos: number): JimpInstance {
+        const x = this.width * SPRITE_SIZE * xPos
+        const y = this.height * SPRITE_SIZE * yPos
+        const w = this.width * SPRITE_SIZE
+        const h = this.height * SPRITE_SIZE
+        return this._spriteMap!.crop({ h, w, x, y }) as JimpInstance
+    }
 }
