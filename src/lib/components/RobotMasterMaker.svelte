@@ -11,17 +11,18 @@
         await controller.imageLoader.loadImages();
 
         let thingy = controller.imageLoader.getCroppedPart("LeftArm", 1, 1);
-        thingy.scale({
-            f: 4,
-            mode: ResizeStrategy.NEAREST_NEIGHBOR,
-        });
-        controller.draw(thingy, 16, 16);
+        thingy.scale({ f: 4, mode: ResizeStrategy.NEAREST_NEIGHBOR });
+        await controller.draw(thingy, 0, 16);
+
+        let thingo = controller.imageLoader.getCroppedPart("RightArm", 2, 3);
+        thingo.scale({ f: 4, mode: ResizeStrategy.NEAREST_NEIGHBOR });
+        await controller.draw(thingo, 0, 16);
     });
 </script>
 
 <div class="container">
     <div class="flex">
-        <canvas bind:this={canvas}></canvas>
+        <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
             <li></li>
             <li></li>
@@ -56,7 +57,7 @@
     canvas {
         display: inline-block;
         width: min(100%, var(--canvas-size));
-        aspect-ratio: 1;
+        height: min(100%, var(--canvas-size));
         image-rendering: pixelated;
     }
 
