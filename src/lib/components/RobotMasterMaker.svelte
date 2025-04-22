@@ -1,5 +1,22 @@
 <script lang="ts">
+    import { CanvasController } from "$lib/image/CanvasController.js";
+    import { ResizeStrategy } from "jimp";
+    import { onMount } from "svelte";
+
     let canvas: HTMLCanvasElement;
+    let controller: CanvasController;
+
+    onMount(async () => {
+        controller = new CanvasController(canvas);
+        await controller.imageLoader.loadImages();
+
+        let thingy = controller.imageLoader.getCroppedPart("LeftArm", 1, 1);
+        thingy.scale({
+            f: 4,
+            mode: ResizeStrategy.NEAREST_NEIGHBOR,
+        });
+        controller.draw(thingy, 16, 16);
+    });
 </script>
 
 <div class="container">
@@ -40,6 +57,7 @@
         display: inline-block;
         width: min(100%, var(--canvas-size));
         aspect-ratio: 1;
+        image-rendering: pixelated;
     }
 
     @container container ( max-width: 40rem ) {
