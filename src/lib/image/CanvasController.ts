@@ -13,13 +13,13 @@ export class CanvasController {
         this.ctx = this.canvas.getContext("2d")!
     }
 
-    draw(instance: JimpInstance, dx: number, dy: number) {
+    async draw(instance: JimpInstance, dx: number, dy: number) {
         let imageData = new ImageData(
             new Uint8ClampedArray(instance.bitmap.data),
             instance.bitmap.width,
             instance.bitmap.height
         )
 
-        this.ctx.putImageData(imageData, dx, dy)
+        this.ctx.drawImage(await createImageBitmap(imageData), dx, dy)
     }
 }
