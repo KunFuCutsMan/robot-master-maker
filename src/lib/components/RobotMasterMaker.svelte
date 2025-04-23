@@ -1,22 +1,17 @@
 <script lang="ts">
     import { CanvasController } from "$lib/image/CanvasController.js";
-    import { ResizeStrategy } from "jimp";
     import { onMount } from "svelte";
+    import PartTag from "./PartTag.svelte";
+    import { setCanvasControllerContext } from "./context.js";
 
     let canvas: HTMLCanvasElement;
-    let controller: CanvasController;
+    let controller = new CanvasController();
+
+    setCanvasControllerContext(controller);
 
     onMount(async () => {
-        controller = new CanvasController(canvas);
+        controller.ctx = canvas.getContext("2d")!;
         await controller.imageLoader.loadImages();
-
-        let thingy = controller.imageLoader.getCroppedPart("LeftArm", 1, 1);
-        thingy.scale({ f: 4, mode: ResizeStrategy.NEAREST_NEIGHBOR });
-        await controller.draw(thingy, 0, 16);
-
-        let thingo = controller.imageLoader.getCroppedPart("RightArm", 2, 3);
-        thingo.scale({ f: 4, mode: ResizeStrategy.NEAREST_NEIGHBOR });
-        await controller.draw(thingo, 0, 16);
     });
 </script>
 
@@ -24,7 +19,9 @@
     <div class="flex">
         <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
-            <li></li>
+            <li>
+                <PartTag rmName="Blizzard" rmPart="Pants" />
+            </li>
             <li></li>
             <li></li>
         </ul>
