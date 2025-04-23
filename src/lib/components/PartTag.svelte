@@ -1,22 +1,22 @@
 <script lang="ts">
     import { RMPosition, type RobotMaster } from "$lib/data/robotMasters.js";
-    import type {
-        BaseImageKey,
-        ImagePartLoader,
-    } from "$lib/image/PartComponents.js";
+    import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
+    import { getCanvasControllerContext } from "./context.js";
 
     type Props = {
-        imageLoader: ImagePartLoader;
         rmName: RobotMaster;
         rmPart: BaseImageKey;
     };
 
-    let { imageLoader: controller, rmName, rmPart }: Props = $props();
+    let { rmName, rmPart }: Props = $props();
+    let controller = getCanvasControllerContext();
     let image: HTMLImageElement;
 
     $effect(() => {
+        if (!controller.imageLoader.imagesLoaded) return;
+
         let { x, y } = RMPosition[rmName];
-        let jimpo = controller.getCroppedPart(rmPart, x, y);
+        let jimpo = controller.imageLoader.getCroppedPart(rmPart, x, y);
 
         if (jimpo.bitmap.data.length > 0) {
             jimpo.getBase64("image/png").then((r) => {
@@ -28,7 +28,7 @@
 
 <article>
     <img bind:this={image} alt={`${rmName}'s ${rmPart}`} />
-    <div>{`${rmName}'s' ${rmPart}`}</div>
+    <div>{`${rmName}'s ${rmPart}`}</div>
 </article>
 
 <style>
@@ -39,6 +39,7 @@
     }
 
     img {
-        aspect-ratio: 1;
+        width: 2rem;
+        image-rendering: pixelated;
     }
 </style>
