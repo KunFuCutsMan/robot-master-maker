@@ -1,16 +1,17 @@
 import type { JimpInstance } from "jimp"
-import { ImagePartLoader } from "./PartComponents.js"
+import { ImagePartLoader } from "./PartComponents.svelte.js"
 
 
 export class CanvasController {
 
     private canvas: HTMLCanvasElement
     private ctx: CanvasRenderingContext2D
-    imageLoader = new ImagePartLoader()
+    imageLoader: ImagePartLoader
 
     constructor(canvasRef: HTMLCanvasElement) {
         this.canvas = canvasRef
         this.ctx = this.canvas.getContext("2d")!
+        this.imageLoader = new ImagePartLoader()
     }
 
     async draw(instance: JimpInstance, dx: number, dy: number) {

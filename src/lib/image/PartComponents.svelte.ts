@@ -5,7 +5,7 @@ import leftLeg from '$lib/assets/left leg.png'
 import rightLeg from '$lib/assets/right leg.png'
 import pants from '$lib/assets/pants.png'
 
-type BaseImageKey = 'Pants'
+export type BaseImageKey = 'Pants'
     | 'LeftLeg' | 'RightLeg'
     | 'LeftArm' | 'RightArm'
 
@@ -16,6 +16,8 @@ export class ImagePartLoader {
     PantsImage: SpriteMap
     LeftLegImage: SpriteMap
     RightLegImage: SpriteMap
+
+    imagesLoaded = $state(false)
 
     constructor() {
         this.LeftArmImage = new SpriteMap(leftArm, 2, 3)
@@ -34,7 +36,7 @@ export class ImagePartLoader {
             this.PantsImage.loadImage(),
         ]
 
-        return Promise.all( promises )
+        return Promise.all( promises ).then( () => { this.imagesLoaded = true } )
     }
 
     /**
