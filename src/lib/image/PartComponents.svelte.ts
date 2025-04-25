@@ -97,6 +97,6 @@ class SpriteMap {
         const y = this.height * SPRITE_SIZE * yPos
         const w = this.width * SPRITE_SIZE
         const h = this.height * SPRITE_SIZE
-        return this._spriteMap!.crop({ h, w, x, y }).autocrop({ cropOnlyFrames: false }) as JimpInstance
+        return this._spriteMap!.clone().crop({ h, w, x, y }).autocrop({ cropOnlyFrames: false }) as JimpInstance
     }
 }

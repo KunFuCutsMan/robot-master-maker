@@ -5,7 +5,7 @@
     import RmSelectTag from "./RMSelectTag.svelte";
 
     type Props = {
-        rmName: RobotMaster;
+        rmName?: RobotMaster;
         rmPart: BaseImageKey;
     };
 
