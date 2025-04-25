@@ -20,7 +20,7 @@
         <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
             <li>
-                <PartTag rmName="Blizzard" rmPart="Pants" />
+                <PartTag rmPart="Pants" />
             </li>
             <li></li>
             <li></li>

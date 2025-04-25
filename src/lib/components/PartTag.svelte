@@ -2,20 +2,25 @@
     import { RMPosition, type RobotMaster } from "$lib/data/robotMasters.js";
     import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
     import { getCanvasControllerContext } from "./context.js";
+    import RmSelectTag from "./RMSelectTag.svelte";
 
     type Props = {
         rmName: RobotMaster;
         rmPart: BaseImageKey;
     };
 
-    let { rmName, rmPart }: Props = $props();
+    let { rmName = $bindable("Cut"), rmPart }: Props = $props();
     let controller = getCanvasControllerContext();
     let image: HTMLImageElement;
 
     $effect(() => {
+        let { x, y } = RMPosition[rmName];
         if (!controller.imageLoader.imagesLoaded) return;
 
-        let { x, y } = RMPosition[rmName];
+        updateImageData(x, y);
+    });
+
+    function updateImageData(x: number, y: number) {
         let jimpo = controller.imageLoader.getCroppedPart(rmPart, x, y);
 
         if (jimpo.bitmap.data.length > 0) {
@@ -23,12 +28,15 @@
                 image.src = r;
             });
         }
-    });
+    }
 </script>
 
 <article>
     <img bind:this={image} alt={`${rmName}'s ${rmPart}`} />
-    <div>{`${rmName}'s ${rmPart}`}</div>
+    <div>
+        <p>{`${rmName}'s ${rmPart}`}</p>
+        <RmSelectTag bind:value={rmName} />
+    </div>
 </article>
 
 <style>
@@ -36,6 +44,15 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+        align-items: center;
+
+        border-radius: 0.5rem;
+        background-color: dimgray;
+        color: white;
+    }
+
+    article > * {
+        margin-inline: 0.5rem;
     }
 
     img {

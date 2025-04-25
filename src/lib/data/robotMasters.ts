@@ -56,3 +56,12 @@ export const RMPosition: Record<RobotMaster, {x: number, y: number}> = {
     Wind: { y: 5, x: 6 },
     Yamato: { y: 5, x: 7 }
 }
+
+export const MMGames: Record<string, number> = {
+    MM1: 0,
+    MM2: 1,
+    MM3: 2,
+    MM4: 3,
+    MM5: 4,
+    MM6: 5,
+}
