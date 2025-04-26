@@ -19,11 +19,11 @@
     <div class="flex">
         <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
-            <li>
-                <PartTag rmPart="Pants" />
-            </li>
-            <li></li>
-            <li></li>
+            <li><PartTag rmPart="LeftArm" /></li>
+            <li><PartTag rmPart="RightArm" /></li>
+            <li><PartTag rmPart="Pants" /></li>
+            <li><PartTag rmPart="LeftLeg" /></li>
+            <li><PartTag rmPart="RightLeg" /></li>
         </ul>
     </div>
 </div>
