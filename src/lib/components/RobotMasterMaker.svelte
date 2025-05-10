@@ -15,7 +15,11 @@
     });
 </script>
 
-<div class="container">
+<div class="rmm-container">
+    <style scoped>
+        @import "open-props/style";
+    </style>
+
     <div class="flex">
         <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
@@ -29,17 +33,9 @@
 </div>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-
-        border: 1px dotted dodgerblue;
-    }
-
-    .container {
+    .rmm-container {
         container: container / inline-size;
-        --canvas-size: 30rem;
+        background-color: var(--surface-4);
     }
 
     .flex {
@@ -53,8 +49,8 @@
 
     canvas {
         display: inline-block;
-        width: min(100%, var(--canvas-size));
-        height: min(100%, var(--canvas-size));
+        width: min(100%, var(--size-15));
+        height: min(100%, var(--size-15));
         image-rendering: pixelated;
     }
 

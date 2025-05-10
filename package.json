@@ -45,6 +45,7 @@
 		"svelte"
 	],
 	"dependencies": {
-		"jimp": "^1.6.0"
+		"jimp": "^1.6.0",
+		"open-props": "^1.7.15"
 	}
 }
