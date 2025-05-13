@@ -2,9 +2,9 @@
     type Props = {
         label: string;
         value: number;
-        min: number;
-        max: number;
-        step: number;
+        min?: number;
+        max?: number;
+        step?: number;
     };
 
     let {
