@@ -45,6 +45,7 @@
     color: var(--text-1);
     font: var(--font-industrial);
     font-size: var(--font-size-1);
+    box-shadow: var(--shadow-4);
 }
 
 .input-bg::picker-icon {

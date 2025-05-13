@@ -73,7 +73,6 @@ Special Select tag that includes all the Robot Masters
 
         border-radius: var(--radius-2);
         border-width: 0;
-        box-shadow: var(--shadow-2);
 
         scrollbar-width: thin;
     }
