@@ -4,6 +4,8 @@
     import PartTag from "./PartTag.svelte";
     import { setCanvasControllerContext } from "./context.js";
 
+    import "$lib/assets/rmm-styles.css";
+
     let canvas: HTMLCanvasElement;
     let controller = new CanvasController();
 
@@ -15,11 +17,7 @@
     });
 </script>
 
-<div class="rmm-container">
-    <style scoped>
-        @import "open-props/style";
-    </style>
-
+<div class="rmm-container surface-4">
     <div class="flex">
         <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
@@ -35,12 +33,12 @@
 <style>
     .rmm-container {
         container: container / inline-size;
-        background-color: var(--surface-4);
     }
 
     .flex {
         display: flex;
-        border: 1px solid red;
+        padding: var(--size-2);
+        gap: var(--size-2);
     }
 
     .flex > :not(canvas) {
@@ -52,6 +50,13 @@
         width: min(100%, var(--size-15));
         height: min(100%, var(--size-15));
         image-rendering: pixelated;
+        background-color: white;
+        margin-block: var(--size-2);
+        border-radius: var(--radius-2);
+    }
+
+    li {
+        list-style: none;
     }
 
     @container container ( max-width: 40rem ) {

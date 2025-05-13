@@ -32,7 +32,7 @@
     }
 </script>
 
-<article class="flex">
+<article class="flex surface-3">
     <img bind:this={image} alt={`${rmName}'s ${rmPart}`} />
     <div>
         <p>{`${rmName}'s ${rmPart}`}</p>
@@ -50,26 +50,24 @@
         flex-direction: row;
         flex-wrap: nowrap;
         align-items: center;
-    }
 
-    .flex > * {
-        margin-inline: 0.5rem;
+        gap: var(--size-4);
     }
 
     article {
-        border-radius: 0.5rem;
-        background-color: dimgray;
-        color: white;
-        padding: 0.5rem;
+        border-radius: var(--radius-2);
+        padding-block: var(--size-3);
+        padding-inline: var(--size-4);
+
+        font-family: var(--font-industrial);
+
+        margin-block: var(--size-3);
+        margin-inline: var(--size-1);
     }
 
     img {
         width: 2rem;
         max-height: 3rem;
         image-rendering: pixelated;
-    }
-
-    p {
-        margin-block: 0.5rem;
     }
 </style>

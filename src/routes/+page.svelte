@@ -22,7 +22,6 @@
 
 <style>
     #robot-master-maker {
-        border: 1px solid black;
         margin: 0;
         padding: 0;
     }
