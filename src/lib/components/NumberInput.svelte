@@ -9,7 +9,7 @@
 
 <label>
     <p>{label}:</p>
-    <input type="number" name="" bind:value />
+    <input type="number" class="input-bg" bind:value />
 </label>
 
 <style>
@@ -30,9 +30,6 @@
         padding: var(--size-1);
 
         width: var(--size-11);
-
-        font: var(--font-industrial);
-        font-size: var(--font-size-1);
 
         background-color: var(--surface-1);
         border-radius: var(--radius-2);

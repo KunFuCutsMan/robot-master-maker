@@ -3,8 +3,9 @@
 
 :root {
     --brand: var(--brand-light);
-    --text-1: var(--gray-8);
+    --text-1: var(--gray-9);
     --text-2: var(--gray-1);
+    --surface-0: var(--blue-1);
     --surface-1: var(--blue-4);
     --surface-2: var(--indigo-7);
     --surface-3: var(--gray-10);
@@ -37,4 +38,21 @@
 .surface-4 {
     background-color: var(--surface-4);
     color: var(--text-2);
+}
+
+.input-bg {
+    background-color: var(--surface-1);
+    color: var(--text-1);
+    font: var(--font-industrial);
+    font-size: var(--font-size-1);
+}
+
+.input-bg::picker-icon {
+    color: var(--surface-3);
+    transition: 200ms rotate;
+    rotate: 90deg;
+}
+
+.input-bg:open::picker-icon {
+    rotate: 0deg;
 }
