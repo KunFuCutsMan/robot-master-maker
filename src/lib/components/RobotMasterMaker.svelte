@@ -17,7 +17,7 @@
     });
 </script>
 
-<div class="rmm-container surface-4">
+<div class="rmm-container">
     <div class="flex">
         <canvas width="256" height="256" bind:this={canvas}></canvas>
         <ul class="parts">
@@ -33,6 +33,7 @@
 <style>
     .rmm-container {
         container: container / inline-size;
+        background: var(--gradient-8);
     }
 
     .flex {

@@ -10,7 +10,7 @@
     --surface-3: var(--gray-10);
     --surface-4: var(--blue-12);
     --surface-shadow: var(--orange-10);
-    --shadow-strength: 4%;
+    --shadow-strength: 10%;
 }
 
 * {

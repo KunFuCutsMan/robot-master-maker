@@ -32,7 +32,7 @@
     }
 </script>
 
-<article class="flex surface-3">
+<article class="flex surface-4">
     <img bind:this={image} alt={`${rmName}'s ${rmPart}`} />
     <div>
         <p>{`${rmName}'s ${rmPart}`}</p>
