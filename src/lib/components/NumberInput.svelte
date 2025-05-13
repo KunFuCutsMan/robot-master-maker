@@ -2,14 +2,23 @@
     type Props = {
         label: string;
         value: number;
+        min: number;
+        max: number;
+        step: number;
     };
 
-    let { label, value = $bindable(1) }: Props = $props();
+    let {
+        label,
+        min = 0,
+        max = 100,
+        step = 1,
+        value = $bindable(1),
+    }: Props = $props();
 </script>
 
 <label>
     <p>{label}:</p>
-    <input type="number" class="input-bg" bind:value />
+    <input type="number" class="input-bg" {min} {max} {step} bind:value />
 </label>
 
 <style>
