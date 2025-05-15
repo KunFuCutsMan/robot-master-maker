@@ -14,11 +14,18 @@
     let controller = getCanvasControllerContext();
     let image: HTMLImageElement;
 
+    let xValue = $state(0);
+    let yValue = $state(0);
+
     $effect(() => {
         let { x, y } = RMPosition[rmName];
         if (!controller.imageLoader.imagesLoaded) return;
 
         updateImageData(x, y);
+    });
+
+    $effect(() => {
+        updateRMPartPosition(xValue, yValue);
     });
 
     function updateImageData(x: number, y: number) {
@@ -28,7 +35,17 @@
             jimpo.getBase64("image/png").then((r) => {
                 image.src = r;
             });
+
+            let part = controller.rmParts.getPart(rmPart);
+            part.img = jimpo;
         }
+    }
+
+    function updateRMPartPosition(x: number, y: number) {
+        let part = controller.rmParts.getPart(rmPart);
+
+        part.x = x;
+        part.y = y;
     }
 </script>
 
@@ -39,8 +56,8 @@
         <RmSelectTag bind:value={rmName} />
     </div>
     <div>
-        <NumberInput label="X Position" value={0} />
-        <NumberInput label="Y Position" value={0} />
+        <NumberInput label="X Position" bind:value={xValue} />
+        <NumberInput label="Y Position" bind:value={yValue} />
     </div>
 </article>
 

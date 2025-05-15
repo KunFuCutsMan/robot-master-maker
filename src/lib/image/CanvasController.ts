@@ -1,14 +1,17 @@
 import type { JimpInstance } from "jimp"
 import { ImagePartLoader } from "./PartComponents.svelte.js"
+import { RobotMasterParts } from "$lib/data/robotMasterParts.svelte.js"
 
 
 export class CanvasController {
 
     ctx?: CanvasRenderingContext2D
     imageLoader: ImagePartLoader
+    rmParts: RobotMasterParts
 
     constructor() {
         this.imageLoader = new ImagePartLoader()
+        this.rmParts = new RobotMasterParts()
     }
 
     async draw(instance: JimpInstance, dx: number, dy: number) {
