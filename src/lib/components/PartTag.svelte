@@ -44,6 +44,8 @@
 
             let part = controller.rmParts.getPart(rmPart);
             part.img = jimpo;
+            part.x = x;
+            part.y = y;
         }
     }
 
@@ -62,8 +64,8 @@
         <RmSelectTag bind:value={rmName} />
     </div>
     <div>
-        <NumberInput label="X Position" bind:value={xValue} />
-        <NumberInput label="Y Position" bind:value={yValue} />
+        <NumberInput label="X Position" bind:value={xValue} min={0} max={63} />
+        <NumberInput label="Y Position" bind:value={yValue} min={0} max={63} />
     </div>
 </article>
 

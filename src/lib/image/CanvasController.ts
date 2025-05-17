@@ -19,29 +19,43 @@ export class CanvasController {
     async setup() {
         await this.imageLoader.loadImages();
 
+        this.rmParts.leftArm.x = 12
+        this.rmParts.leftArm.y = 22
         this.rmParts.leftArm.img = this.imageLoader.getCroppedPart(
             "LeftArm",
-            0,
+            1,
             0
         );
+
+        this.rmParts.rightArm.x = 36
+        this.rmParts.rightArm.y = 22
         this.rmParts.rightArm.img = this.imageLoader.getCroppedPart(
             "RightArm",
-            0,
+            1,
             0
         );
+
+        this.rmParts.pants.x = 24
+        this.rmParts.pants.y = 32
         this.rmParts.pants.img = this.imageLoader.getCroppedPart(
             "Pants",
-            0,
+            1,
             0
         );
+
+        this.rmParts.leftLeg.x = 10
+        this.rmParts.leftLeg.y = 34
         this.rmParts.leftLeg.img = this.imageLoader.getCroppedPart(
             "LeftLeg",
-            0,
+            1,
             0
         );
+
+        this.rmParts.rightLeg.x = 34
+        this.rmParts.rightLeg.y = 34
         this.rmParts.rightLeg.img = this.imageLoader.getCroppedPart(
             "RightLeg",
-            0,
+            1,
             0
         );
     }

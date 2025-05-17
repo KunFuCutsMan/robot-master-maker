@@ -21,7 +21,7 @@
 
 <div class="rmm-container">
     <div class="flex">
-        <canvas width="256" height="256" bind:this={canvas}></canvas>
+        <canvas width="64" height="64" bind:this={canvas}></canvas>
         <ul class="parts">
             <li><PartTag rmPart="LeftArm" /></li>
             <li><PartTag rmPart="RightArm" /></li>
@@ -53,7 +53,7 @@
         width: min(100%, var(--size-15));
         height: min(100%, var(--size-15));
         image-rendering: pixelated;
-        background-color: white;
+        background-color: rebeccapurple;
         margin-block: var(--size-2);
         border-radius: var(--radius-2);
     }
