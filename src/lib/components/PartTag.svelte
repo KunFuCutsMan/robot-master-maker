@@ -14,18 +14,13 @@
     let controller = getCanvasControllerContext();
     let image: HTMLImageElement;
 
-    let xValue = $state(0);
-    let yValue = $state(0);
+    let thisPart = controller.rmParts.getPart(rmPart);
 
     $effect(() => {
         let { x, y } = RMPosition[rmName];
         if (!controller.imageLoader.imagesLoaded) return;
 
         updateImageData(x, y);
-    });
-
-    $effect(() => {
-        updateRMPartPosition(xValue, yValue);
     });
 
     $effect(() => {
@@ -42,18 +37,8 @@
                 image.src = r;
             });
 
-            let part = controller.rmParts.getPart(rmPart);
-            part.img = jimpo;
-            part.x = x;
-            part.y = y;
+            thisPart.img = jimpo;
         }
-    }
-
-    function updateRMPartPosition(x: number, y: number) {
-        let part = controller.rmParts.getPart(rmPart);
-
-        part.x = x;
-        part.y = y;
     }
 </script>
 
@@ -64,8 +49,18 @@
         <RmSelectTag bind:value={rmName} />
     </div>
     <div>
-        <NumberInput label="X Position" bind:value={xValue} min={0} max={63} />
-        <NumberInput label="Y Position" bind:value={yValue} min={0} max={63} />
+        <NumberInput
+            label="X Position"
+            bind:value={thisPart.x}
+            min={0}
+            max={63}
+        />
+        <NumberInput
+            label="Y Position"
+            bind:value={thisPart.y}
+            min={0}
+            max={63}
+        />
     </div>
 </article>
 
