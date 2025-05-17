@@ -13,33 +13,9 @@
 
     onMount(async () => {
         controller.ctx = canvas.getContext("2d")!;
-        await controller.imageLoader.loadImages();
-
-        controller.rmParts.leftArm.img = controller.imageLoader.getCroppedPart(
-            "LeftArm",
-            0,
-            0
-        );
-        controller.rmParts.rightArm.img = controller.imageLoader.getCroppedPart(
-            "RightArm",
-            0,
-            0
-        );
-        controller.rmParts.pants.img = controller.imageLoader.getCroppedPart(
-            "Pants",
-            0,
-            0
-        );
-        controller.rmParts.leftLeg.img = controller.imageLoader.getCroppedPart(
-            "LeftLeg",
-            0,
-            0
-        );
-        controller.rmParts.rightLeg.img = controller.imageLoader.getCroppedPart(
-            "RightLeg",
-            0,
-            0
-        );
+        controller.canvasWidth = canvas.width;
+        controller.canvasHeight = canvas.height;
+        await controller.setup();
     });
 </script>
 

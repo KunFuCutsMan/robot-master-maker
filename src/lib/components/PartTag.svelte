@@ -28,6 +28,12 @@
         updateRMPartPosition(xValue, yValue);
     });
 
+    $effect(() => {
+        if (!controller.imageLoader.imagesLoaded) return;
+
+        controller.drawRobotMaster();
+    });
+
     function updateImageData(x: number, y: number) {
         let jimpo = controller.imageLoader.getCroppedPart(rmPart, x, y);
 
