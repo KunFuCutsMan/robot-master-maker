@@ -5,6 +5,7 @@
     import { setCanvasControllerContext } from "./context.js";
 
     import "$lib/assets/rmm-styles.css";
+    import OpenDialog from "./OpenDialog.svelte";
 
     let canvas: HTMLCanvasElement;
     let controller = new CanvasController();
@@ -31,6 +32,8 @@
         </ul>
     </div>
 </div>
+
+<OpenDialog />
 
 <style>
     .rmm-container {
