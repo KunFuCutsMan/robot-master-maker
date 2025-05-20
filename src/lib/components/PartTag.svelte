@@ -1,6 +1,8 @@
 <script lang="ts">
     import { RMPosition, type RobotMaster } from "$lib/data/robotMasters.js";
     import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
+    import { type JimpInstance } from "jimp";
+    import ColorPicker from "./ColorPicker.svelte";
     import { getCanvasControllerContext } from "./context.js";
     import NumberInput from "./NumberInput.svelte";
     import RmSelectTag from "./RMSelectTag.svelte";
@@ -55,6 +57,8 @@
             min={0}
             max={63}
         />
+    </div>
+    <div>
         <NumberInput
             label="Y Position"
             bind:value={thisPart.y}
@@ -62,13 +66,17 @@
             max={63}
         />
     </div>
+    <div>
+        <ColorPicker jimpo={thisPart.img as JimpInstance} />
+    </div>
 </article>
 
 <style>
     .flex {
         display: flex;
         flex-direction: row;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: space-around;
         align-items: center;
 
         gap: var(--size-4);
