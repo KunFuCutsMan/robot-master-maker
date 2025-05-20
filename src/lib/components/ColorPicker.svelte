@@ -18,6 +18,7 @@
 
         return [...currentColors.values()]
             .filter((n) => n !== 0)
+            .toSorted((a, b) => a - b)
             .map((v) => intToRGBA(v));
     });
 </script>
@@ -32,11 +33,11 @@
 </div>
 
 {#snippet colorButton(color: RGBAColor)}
-    <button>
-        {color.r}
-        {color.g}
-        {color.b}
-        {color.a}
+    <button aria-label="Click to modify color">
+        <div
+            class="square"
+            style:--color={`rgb(${color.r}, ${color.g}, ${color.b}, ${color.a})`}
+        ></div>
     </button>
 {/snippet}
 
@@ -47,5 +48,20 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    button {
+        border: 0;
+        cursor: pointer;
+        background: var(--gradient-8);
+        padding: var(--size-1);
+        border-radius: var(--radius-2);
+    }
+
+    .square {
+        width: var(--size-4);
+        aspect-ratio: var(--ratio-square);
+        background-color: var(--color, transparent);
+        border-radius: var(--radius-1);
     }
 </style>

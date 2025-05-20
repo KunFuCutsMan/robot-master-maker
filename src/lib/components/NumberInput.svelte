@@ -28,11 +28,6 @@
         margin-block: var(--size-1);
     }
 
-    p {
-        width: fit-content;
-        display: inline-block;
-    }
-
     input {
         appearance: none;
         display: inline-block;
