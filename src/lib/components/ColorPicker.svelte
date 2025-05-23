@@ -1,6 +1,7 @@
 <script lang="ts">
     import { intToRGBA, type JimpInstance, type RGBAColor } from "jimp";
-    import { closeDialog, openDialog } from "$lib/data/dialogStore.svelte.js";
+    import { openDialog } from "$lib/data/dialogStore.svelte.js";
+    import ColorChanger from "./ColorChanger.svelte";
 
     type Props = {
         jimpo: JimpInstance;
@@ -43,8 +44,7 @@
 {/snippet}
 
 {#snippet dialogContent()}
-    <p>ajdnsdjvndsf</p>
-    <button use:closeDialog>Close</button>
+    <ColorChanger {jimpo} />
 {/snippet}
 
 <style>

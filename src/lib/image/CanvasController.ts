@@ -1,6 +1,7 @@
 import { type JimpInstance } from "jimp"
 import { ImagePartLoader } from "./PartComponents.svelte.js"
 import { RobotMasterParts } from "$lib/data/robotMasterParts.svelte.js"
+import { NESColors } from "./NESColors.svelte.js"
 
 
 export class CanvasController {
@@ -10,14 +11,19 @@ export class CanvasController {
     canvasHeight: number = 0
     imageLoader: ImagePartLoader
     rmParts: RobotMasterParts
+    nesColors: NESColors
 
     constructor() {
         this.imageLoader = new ImagePartLoader()
         this.rmParts = new RobotMasterParts()
+        this.nesColors = new NESColors()
     }
 
     async setup() {
-        await this.imageLoader.loadImages();
+        await Promise.all([
+            this.imageLoader.loadImages(),
+            this.nesColors.loadColors()
+        ])
 
         this.rmParts.leftArm.x = 12
         this.rmParts.leftArm.y = 22
