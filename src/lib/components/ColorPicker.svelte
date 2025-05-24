@@ -41,10 +41,12 @@
             style:--color={`rgb(${color.r}, ${color.g}, ${color.b}, ${color.a})`}
         ></div>
     </button>
-{/snippet}
 
-{#snippet dialogContent()}
-    <ColorChanger {jimpo} />
+    {#snippet dialogContent()}
+        <ColorChanger {jimpo} selectedColor={color} />
+    {/snippet}
+
+    {$inspect(jimpo).with(console.log)}
 {/snippet}
 
 <style>

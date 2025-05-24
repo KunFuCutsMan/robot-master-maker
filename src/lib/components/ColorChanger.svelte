@@ -1,12 +1,19 @@
 <script lang="ts">
-    import { cssColorToHex, type JimpInstance, type RGBAColor } from "jimp";
+    import {
+        cssColorToHex,
+        rgbaToInt,
+        type JimpInstance,
+        type RGBAColor,
+    } from "jimp";
     import { getCanvasControllerContext } from "./context.js";
+    import { closeDialog } from "$lib/data/dialogStore.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
+        selectedColor: RGBAColor;
     };
 
-    let { jimpo }: Props = $props();
+    let { jimpo, selectedColor }: Props = $props();
     let { nesColors } = getCanvasControllerContext();
 
     let colors = $derived.by(() => {
@@ -14,6 +21,26 @@
 
         return nesColors.colors();
     });
+
+    function changeColor(color: RGBAColor) {
+        for (const { x, y } of jimpo.scanIterator()) {
+            if (
+                jimpo.getPixelColor(x, y) ==
+                rgbaToInt(
+                    selectedColor.r,
+                    selectedColor.g,
+                    selectedColor.b,
+                    selectedColor.a
+                )
+            ) {
+                jimpo.setPixelColor(
+                    rgbaToInt(color.r, color.g, color.b, color.a),
+                    x,
+                    y
+                );
+            }
+        }
+    }
 </script>
 
 <p>Click one of the buttons to select it:</p>
@@ -26,9 +53,14 @@
 
 {#snippet colorButton(c: RGBAColor)}
     {@const color = `rgb(${c.r}, ${c.g}, ${c.b}, ${c.a})`}
-    <button aria-label="Click to change to this color">
+    <button
+        aria-label="Click to change to this color"
+        onclick={() => changeColor(c)}
+        use:closeDialog
+    >
         <div class="square" style:--color={color}></div>
     </button>
+    {$inspect(jimpo).with(console.log)}
 {/snippet}
 
 <style>
