@@ -1,5 +1,6 @@
 import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js"
 import type { JimpInstance } from "jimp"
+import type { RobotMaster } from "./robotMasters.js"
 
 export class RobotMasterParts {
 
@@ -20,8 +21,9 @@ export class RobotMasterParts {
     }
 }
 
-class Part {
-    x: number = $state(0)
-    y: number = $state(0)
+export class Part {
+    x: number = 0
+    y: number = 0
     img = $state<JimpInstance>()
+    name: RobotMaster = "Cut"
 }

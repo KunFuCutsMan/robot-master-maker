@@ -1,36 +1,29 @@
 <script lang="ts">
-    import { RMPosition, type RobotMaster } from "$lib/data/robotMasters.js";
     import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
     import { type JimpInstance } from "jimp";
     import ColorPicker from "./ColorPicker.svelte";
-    import { getCanvasControllerContext } from "./context.js";
     import NumberInput from "./NumberInput.svelte";
     import RmSelectTag from "./RMSelectTag.svelte";
+    import { controller } from "$lib/data/canvasControllerStore.js";
+    import { Part } from "$lib/data/robotMasterParts.svelte.js";
+    import { onMount } from "svelte";
 
     type Props = {
-        rmName?: RobotMaster;
         rmPart: BaseImageKey;
     };
 
-    let { rmName = $bindable("Cut"), rmPart }: Props = $props();
-    let controller = getCanvasControllerContext();
+    let { rmPart }: Props = $props();
     let image: HTMLImageElement;
 
-    let thisPart = controller.rmParts.getPart(rmPart);
+    let thisPart = $state<Part>(new Part());
 
-    $effect(() => {
-        let { x, y } = RMPosition[rmName];
-        if (!controller.imageLoader.imagesLoaded) return;
-
-        updateImageData(x, y);
+    onMount(() => {
+        controller.subscribe((v) => {
+            thisPart = v.getPart(rmPart);
+        });
     });
 
-    $effect(() => {
-        if (!controller.imageLoader.imagesLoaded) return;
-
-        controller.drawRobotMaster();
-    });
-
+    /*
     function updateImageData(x: number, y: number) {
         let jimpo = controller.imageLoader.getCroppedPart(rmPart, x, y);
 
@@ -42,13 +35,14 @@
             thisPart.img = jimpo;
         }
     }
+    */
 </script>
 
 <article class="flex surface-4">
-    <img bind:this={image} alt={`${rmName}'s ${rmPart}`} />
+    <img bind:this={image} alt={`${thisPart.name}'s ${rmPart}`} />
     <div>
-        <p>{`${rmName}'s ${rmPart}`}</p>
-        <RmSelectTag bind:value={rmName} />
+        <p>{`${thisPart.name}'s ${rmPart}`}</p>
+        <RmSelectTag bind:value={thisPart.name} />
     </div>
     <div>
         <NumberInput

@@ -1,23 +1,13 @@
 <script lang="ts">
-    import { CanvasController } from "$lib/image/CanvasController.js";
-    import { onMount } from "svelte";
-    import PartTag from "./PartTag.svelte";
-    import { setCanvasControllerContext } from "./context.js";
-
     import "$lib/assets/rmm-styles.css";
+    import PartTag from "./PartTag.svelte";
     import OpenDialog from "./OpenDialog.svelte";
+    import { controller } from "$lib/data/canvasControllerStore.js";
+    import { onMount } from "svelte";
 
     let canvas: HTMLCanvasElement;
-    let controller = new CanvasController();
 
-    setCanvasControllerContext(controller);
-
-    onMount(async () => {
-        controller.ctx = canvas.getContext("2d")!;
-        controller.canvasWidth = canvas.width;
-        controller.canvasHeight = canvas.height;
-        await controller.setup();
-    });
+    onMount(async () => await $controller.setup(canvas));
 </script>
 
 <div class="rmm-container">
