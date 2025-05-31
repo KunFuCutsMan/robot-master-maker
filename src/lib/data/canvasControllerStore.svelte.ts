@@ -1,6 +1,5 @@
 import { NESColors } from "$lib/image/NESColors.svelte.js";
 import { ImagePartLoader, type BaseImageKey } from "$lib/image/PartComponents.svelte.js";
-import { writable } from "svelte/store";
 import { RobotMasterParts } from "./robotMasterParts.svelte.js";
 import type { JimpInstance } from "jimp";
 
@@ -9,15 +8,9 @@ class CanvasController  {
     private ctx?: CanvasRenderingContext2D
     private canvasWidth: number = 0
     private canvasHeight: number = 0
-    private imageLoader: ImagePartLoader
-    private rmParts: RobotMasterParts
-    private nesColors: NESColors
-
-    constructor() {
-        this.imageLoader = new ImagePartLoader()
-        this.rmParts = new RobotMasterParts()
-        this.nesColors = new NESColors()
-    }
+    private imageLoader = $state(new ImagePartLoader())
+    public rmParts = $state(new RobotMasterParts())
+    private nesColors = $state(new NESColors())
 
     async setup( canvas: HTMLCanvasElement ) {
         this.ctx = canvas.getContext("2d")!
@@ -108,12 +101,16 @@ class CanvasController  {
         return this.imageLoader.imagesLoaded && this.nesColors.colorsLoaded
     }
 
-    getPart( partTag: BaseImageKey ) {
-        return this.rmParts.getPart(partTag)
-    }
-
     getNesColors() {
         return this.nesColors
+    }
+
+    getPart(key: BaseImageKey) {
+        return this.rmParts.getPart(key)
+    }
+
+    getCroppedPart(key: BaseImageKey, xPos: number, yPos: number) {
+        return this.imageLoader.getCroppedPart(key, xPos, yPos)
     }
 }
 
@@ -126,4 +123,4 @@ class CanvasController  {
  * (along with modifications), x and y position to draw on canvas
  * - nesColors: Image with references to all usable colors
  */
-export const controller = writable( new CanvasController() )
+export const controller = new CanvasController()

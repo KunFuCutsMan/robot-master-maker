@@ -1,47 +1,41 @@
 <script lang="ts">
-    import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
     import { type JimpInstance } from "jimp";
     import ColorPicker from "./ColorPicker.svelte";
     import NumberInput from "./NumberInput.svelte";
     import RmSelectTag from "./RMSelectTag.svelte";
-    import { controller } from "$lib/data/canvasControllerStore.js";
-    import { Part } from "$lib/data/robotMasterParts.svelte.js";
-    import { onMount } from "svelte";
+    import type { Part } from "$lib/data/robotMasterParts.svelte.js";
+    import { controller } from "$lib/data/canvasControllerStore.svelte.js";
+    import { RMPosition } from "$lib/data/robotMasters.js";
 
     type Props = {
-        rmPart: BaseImageKey;
+        thisPart: Part;
     };
 
-    let { rmPart }: Props = $props();
+    let { thisPart = $bindable<Part>() }: Props = $props();
     let image: HTMLImageElement;
 
-    let thisPart = $state<Part>(new Part());
-
-    onMount(() => {
-        controller.subscribe((v) => {
-            thisPart = v.getPart(rmPart);
-        });
+    $effect(() => {
+        if (!controller.isLoaded()) return;
+        if (thisPart.img?.bitmap.data.length ?? 0 > 0) {
+            thisPart.img?.getBase64("image/png").then((r) => (image.src = r));
+        }
     });
 
-    /*
-    function updateImageData(x: number, y: number) {
-        let jimpo = controller.imageLoader.getCroppedPart(rmPart, x, y);
+    $effect(() => {
+        if (controller.isLoaded()) controller.drawRobotMaster();
+    });
 
-        if (jimpo.bitmap.data.length > 0) {
-            jimpo.getBase64("image/png").then((r) => {
-                image.src = r;
-            });
-
-            thisPart.img = jimpo;
-        }
-    }
-    */
+    $effect(() => {
+        if (!controller.isLoaded()) return;
+        let { x, y } = RMPosition[thisPart.name];
+        thisPart.img = controller.getCroppedPart(thisPart.type, x, y);
+    });
 </script>
 
 <article class="flex surface-4">
-    <img bind:this={image} alt={`${thisPart.name}'s ${rmPart}`} />
+    <img bind:this={image} alt={`${thisPart.name}'s ${thisPart.type}`} />
     <div>
-        <p>{`${thisPart.name}'s ${rmPart}`}</p>
+        <p>{`${thisPart.name}'s ${thisPart.type}`}</p>
         <RmSelectTag bind:value={thisPart.name} />
     </div>
     <div>

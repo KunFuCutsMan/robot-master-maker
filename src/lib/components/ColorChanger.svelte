@@ -6,7 +6,7 @@
         type RGBAColor,
     } from "jimp";
     import { closeDialog } from "$lib/data/dialogStore.svelte.js";
-    import { controller } from "$lib/data/canvasControllerStore.js";
+    import { controller } from "$lib/data/canvasControllerStore.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
@@ -14,10 +14,10 @@
     };
 
     let { jimpo, selectedColor }: Props = $props();
-    let nesColors = $controller.getNesColors();
+    let nesColors = controller.getNesColors();
 
     let colors = $derived.by(() => {
-        if ($controller.isLoaded()) return [];
+        if (controller.isLoaded()) return [];
 
         return nesColors.colors();
     });

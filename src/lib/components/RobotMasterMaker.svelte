@@ -2,23 +2,23 @@
     import "$lib/assets/rmm-styles.css";
     import PartTag from "./PartTag.svelte";
     import OpenDialog from "./OpenDialog.svelte";
-    import { controller } from "$lib/data/canvasControllerStore.js";
+    import { controller } from "$lib/data/canvasControllerStore.svelte.js";
     import { onMount } from "svelte";
 
     let canvas: HTMLCanvasElement;
 
-    onMount(async () => await $controller.setup(canvas));
+    onMount(async () => await controller.setup(canvas));
 </script>
 
 <div class="rmm-container">
     <div class="flex">
         <canvas width="64" height="64" bind:this={canvas}></canvas>
         <ul class="parts">
-            <li><PartTag rmPart="LeftArm" /></li>
-            <li><PartTag rmPart="RightArm" /></li>
-            <li><PartTag rmPart="Pants" /></li>
-            <li><PartTag rmPart="LeftLeg" /></li>
-            <li><PartTag rmPart="RightLeg" /></li>
+            <li><PartTag thisPart={controller.rmParts.leftArm} /></li>
+            <li><PartTag thisPart={controller.rmParts.rightArm} /></li>
+            <li><PartTag thisPart={controller.rmParts.pants} /></li>
+            <li><PartTag thisPart={controller.rmParts.leftLeg} /></li>
+            <li><PartTag thisPart={controller.rmParts.rightArm} /></li>
         </ul>
     </div>
 </div>

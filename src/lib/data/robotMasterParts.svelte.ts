@@ -4,11 +4,11 @@ import type { RobotMaster } from "./robotMasters.js"
 
 export class RobotMasterParts {
 
-    leftArm = new Part()
-    rightArm = new Part()
-    pants = new Part()
-    leftLeg = new Part()
-    rightLeg = new Part()
+    leftArm = new Part("LeftArm")
+    rightArm = new Part("RightArm")
+    pants = new Part("Pants")
+    leftLeg = new Part("LeftLeg")
+    rightLeg = new Part("RightLeg")
 
     getPart( key: BaseImageKey ): Part {
         switch (key) {
@@ -22,8 +22,13 @@ export class RobotMasterParts {
 }
 
 export class Part {
-    x: number = 0
-    y: number = 0
+    x = $state(0)
+    y = $state(0)
     img = $state<JimpInstance>()
-    name: RobotMaster = "Cut"
+    name = $state<RobotMaster>("Cut")
+    type: BaseImageKey
+
+    constructor(key: BaseImageKey) {
+        this.type = key
+    }
 }

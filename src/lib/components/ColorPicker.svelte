@@ -45,8 +45,6 @@
     {#snippet dialogContent()}
         <ColorChanger {jimpo} selectedColor={color} />
     {/snippet}
-
-    {$inspect(jimpo).with(console.log)}
 {/snippet}
 
 <style>
