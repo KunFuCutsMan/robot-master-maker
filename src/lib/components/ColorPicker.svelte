@@ -1,7 +1,7 @@
 <script lang="ts">
     import { intToRGBA, type JimpInstance, type RGBAColor } from "jimp";
-    import { openDialog } from "$lib/data/dialogStore.svelte.js";
     import ColorChanger from "./ColorChanger.svelte";
+    import { openDialog } from "$lib/components/Dialog/index.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
@@ -41,10 +41,13 @@
             style:--color={`rgb(${color.r}, ${color.g}, ${color.b}, ${color.a})`}
         ></div>
     </button>
+{/snippet}
 
-    {#snippet dialogContent()}
+{#snippet dialogContent()}
+    <!--
         <ColorChanger {jimpo} selectedColor={color} />
-    {/snippet}
+        -->
+    Dialog Content
 {/snippet}
 
 <style>

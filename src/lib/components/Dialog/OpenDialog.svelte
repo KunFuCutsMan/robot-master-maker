@@ -1,31 +1,22 @@
 <script lang="ts">
     import {
         closeDialog,
-        store,
-        type DialogStore,
-    } from "$lib/data/dialogStore.svelte.js";
-    import { onMount, type Snippet } from "svelte";
-
-    let inner = $state<Snippet | null>(null);
+        getDialogContent,
+        isDialogOpen,
+    } from "./index.svelte.js";
 
     let dialog: HTMLDialogElement;
 
-    store.subscribe((v) => {
-        inner = v?.inner ?? null;
-
-        if (v?.isOpen) {
-            dialog?.showModal();
-        } else {
-            dialog?.close();
+    $effect(() => {
+        if (dialog ?? null) {
+            isDialogOpen() ? dialog.showModal() : dialog.close();
         }
     });
 </script>
 
 <dialog bind:this={dialog}>
     <section>
-        {#if inner}
-            {@render inner()}
-        {/if}
+        {@render getDialogContent()()}
     </section>
     <button aria-label="Close Dialog" class="surface-1" use:closeDialog
         >X</button

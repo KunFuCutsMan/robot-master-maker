@@ -1,12 +1,7 @@
 <script lang="ts">
-    import {
-        cssColorToHex,
-        rgbaToInt,
-        type JimpInstance,
-        type RGBAColor,
-    } from "jimp";
-    import { closeDialog } from "$lib/data/dialogStore.svelte.js";
+    import { rgbaToInt, type JimpInstance, type RGBAColor } from "jimp";
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
+    import { closeDialog } from "$lib/components/Dialog/index.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
@@ -60,7 +55,6 @@
     >
         <div class="square" style:--color={color}></div>
     </button>
-    {$inspect(jimpo).with(console.log)}
 {/snippet}
 
 <style>
