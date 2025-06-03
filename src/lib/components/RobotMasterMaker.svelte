@@ -1,7 +1,7 @@
 <script lang="ts">
     import "$lib/assets/rmm-styles.css";
     import PartTag from "./PartTag.svelte";
-    import OpenDialog from "$lib/components/Dialog/OpenDialog.svelte";
+    import Modal from "$lib/components/Dialog/Modal.svelte";
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
     import { onMount } from "svelte";
 
@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<OpenDialog />
+<Modal />
 
 <style>
     .rmm-container {
