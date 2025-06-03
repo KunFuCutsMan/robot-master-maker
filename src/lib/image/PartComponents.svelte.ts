@@ -6,8 +6,8 @@ import rightLeg from '$lib/assets/right leg.png'
 import pants from '$lib/assets/pants.png'
 
 export type BaseImageKey = 'Pants'
-    | 'LeftLeg' | 'RightLeg'
-    | 'LeftArm' | 'RightArm'
+    | 'Left Leg' | 'Right Leg'
+    | 'Left Arm' | 'Right Arm'
 
 export class ImagePartLoader {
 
@@ -48,13 +48,13 @@ export class ImagePartLoader {
      */
     getCroppedPart( baseImageKey: BaseImageKey, xPos: number, yPos: number ): JimpInstance {
         switch (baseImageKey) {
-            case 'LeftArm':
+            case 'Left Arm':
                 return this.LeftArmImage.getCroppedPart(xPos, yPos)
-            case 'RightArm':
+            case 'Right Arm':
                 return this.RightArmImage.getCroppedPart(xPos, yPos)
-            case 'LeftLeg':
+            case 'Left Leg':
                 return this.LeftLegImage.getCroppedPart(xPos, yPos)
-            case 'RightLeg':
+            case 'Right Leg':
                 return this.RightLegImage.getCroppedPart(xPos, yPos)
             case "Pants":
                 return this.PantsImage.getCroppedPart(xPos, yPos)

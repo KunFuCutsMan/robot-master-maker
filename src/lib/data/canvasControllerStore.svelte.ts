@@ -25,7 +25,7 @@ class CanvasController  {
         this.rmParts.leftArm.x = 12
         this.rmParts.leftArm.y = 22
         this.rmParts.leftArm.img = this.imageLoader.getCroppedPart(
-            "LeftArm",
+            "Left Arm",
             1,
             0
         );
@@ -33,7 +33,7 @@ class CanvasController  {
         this.rmParts.rightArm.x = 36
         this.rmParts.rightArm.y = 22
         this.rmParts.rightArm.img = this.imageLoader.getCroppedPart(
-            "RightArm",
+            "Right Arm",
             1,
             0
         );
@@ -49,7 +49,7 @@ class CanvasController  {
         this.rmParts.leftLeg.x = 10
         this.rmParts.leftLeg.y = 34
         this.rmParts.leftLeg.img = this.imageLoader.getCroppedPart(
-            "LeftLeg",
+            "Left Leg",
             1,
             0
         );
@@ -57,12 +57,10 @@ class CanvasController  {
         this.rmParts.rightLeg.x = 34
         this.rmParts.rightLeg.y = 34
         this.rmParts.rightLeg.img = this.imageLoader.getCroppedPart(
-            "RightLeg",
+            "Right Leg",
             1,
             0
         );
-
-        console.log("Canvas Controller is ready")
     }
 
     private draw(instance: JimpInstance, dx: number, dy: number) {
@@ -82,11 +80,11 @@ class CanvasController  {
 
     drawRobotMaster() {
         const partsInOrder = [
-            this.rmParts.getPart('LeftArm'),
-            this.rmParts.getPart('LeftLeg'),
+            this.rmParts.getPart('Left Arm'),
+            this.rmParts.getPart('Left Leg'),
             this.rmParts.getPart('Pants'),
-            this.rmParts.getPart('RightArm'),
-            this.rmParts.getPart('RightLeg'),
+            this.rmParts.getPart('Right Arm'),
+            this.rmParts.getPart('Right Leg'),
         ]
 
         this.clearCanvas()

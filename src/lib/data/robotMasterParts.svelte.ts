@@ -4,19 +4,19 @@ import type { RobotMaster } from "./robotMasters.js"
 
 export class RobotMasterParts {
 
-    leftArm = new Part("LeftArm")
-    rightArm = new Part("RightArm")
+    leftArm = new Part("Left Arm")
+    rightArm = new Part("Right Arm")
     pants = new Part("Pants")
-    leftLeg = new Part("LeftLeg")
-    rightLeg = new Part("RightLeg")
+    leftLeg = new Part("Left Leg")
+    rightLeg = new Part("Right Leg")
 
     getPart( key: BaseImageKey ): Part {
         switch (key) {
-            case 'LeftArm': return this.leftArm
-            case 'RightArm': return this.rightArm
+            case 'Left Arm': return this.leftArm
+            case 'Right Arm': return this.rightArm
             case 'Pants': return this.pants
-            case 'LeftLeg': return this.leftLeg
-            case 'RightLeg': return this.rightLeg
+            case 'Left Leg': return this.leftLeg
+            case 'Right Leg': return this.rightLeg
         }
     }
 }
