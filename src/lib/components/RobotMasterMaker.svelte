@@ -18,7 +18,7 @@
             <li><PartTag thisPart={controller.rmParts.rightArm} /></li>
             <li><PartTag thisPart={controller.rmParts.pants} /></li>
             <li><PartTag thisPart={controller.rmParts.leftLeg} /></li>
-            <li><PartTag thisPart={controller.rmParts.rightArm} /></li>
+            <li><PartTag thisPart={controller.rmParts.rightLeg} /></li>
         </ul>
     </div>
 </div>
