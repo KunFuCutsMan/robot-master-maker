@@ -46,6 +46,7 @@
 	],
 	"dependencies": {
 		"jimp": "^1.6.0",
-		"open-props": "^1.7.15"
+		"open-props": "^1.7.15",
+		"svelte-modals": "^2.0.1"
 	}
 }

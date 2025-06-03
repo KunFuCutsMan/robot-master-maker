@@ -1,7 +1,6 @@
 <script lang="ts">
     import { intToRGBA, type JimpInstance, type RGBAColor } from "jimp";
     import ColorChanger from "./ColorChanger.svelte";
-    import { openDialog } from "$lib/components/Dialog/index.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
@@ -35,7 +34,7 @@
 </div>
 
 {#snippet colorButton(color: RGBAColor)}
-    <button aria-label="Click to modify color" use:openDialog={dialogContent}>
+    <button aria-label="Click to modify color">
         <div
             class="square"
             style:--color={`rgb(${color.r}, ${color.g}, ${color.b}, ${color.a})`}

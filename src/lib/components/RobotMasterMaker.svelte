@@ -1,7 +1,6 @@
 <script lang="ts">
     import "$lib/assets/rmm-styles.css";
     import PartTag from "./PartTag.svelte";
-    import Modal from "$lib/components/Dialog/Modal.svelte";
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
     import { onMount } from "svelte";
 
@@ -22,8 +21,6 @@
         </ul>
     </div>
 </div>
-
-<Modal />
 
 <style>
     .rmm-container {

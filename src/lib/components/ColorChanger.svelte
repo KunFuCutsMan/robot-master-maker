@@ -1,7 +1,6 @@
 <script lang="ts">
     import { rgbaToInt, type JimpInstance, type RGBAColor } from "jimp";
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
-    import { closeDialog } from "$lib/components/Dialog/index.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
@@ -51,7 +50,6 @@
     <button
         aria-label="Click to change to this color"
         onclick={() => changeColor(c)}
-        use:closeDialog
     >
         <div class="square" style:--color={color}></div>
     </button>
