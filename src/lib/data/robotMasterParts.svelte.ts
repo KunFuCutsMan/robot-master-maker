@@ -38,5 +38,11 @@ export class Part {
                 this.img!.setPixelColor( rgbaToInt(newColor.r, newColor.g, newColor.b, newColor.a), x, y );
             }
         }
+
+        // Now svelte knows the image was modified
+        // Thanks m8! https://github.com/sveltejs/svelte/issues/14520#issuecomment-2562014563
+        let tmp = this.img;
+		this.img = undefined;
+		this.img = tmp;
     }
 }

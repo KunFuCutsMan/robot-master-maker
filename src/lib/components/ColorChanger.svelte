@@ -21,7 +21,6 @@
     function changeColor(color: RGBAColor) {
         let thisPart = controller.getPart(selectedPart);
         thisPart.colorSwap(selectedColor, color);
-        controller.drawRobotMaster();
     }
 </script>
 
