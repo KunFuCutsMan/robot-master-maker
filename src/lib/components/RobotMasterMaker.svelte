@@ -2,6 +2,7 @@
     import "$lib/assets/rmm-styles.css";
     import PartTag from "./PartTag.svelte";
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
+    import { Modals } from "svelte-modals";
     import { onMount } from "svelte";
 
     let canvas: HTMLCanvasElement;
@@ -22,6 +23,14 @@
     </div>
 </div>
 
+<Modals>
+    {#snippet backdrop({ close })}
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
+        <div class="backdrop" onclick={() => close()}></div>
+    {/snippet}
+</Modals>
+
 <style>
     .rmm-container {
         container: container / inline-size;
@@ -36,6 +45,10 @@
 
     .flex > :not(canvas) {
         flex-grow: 1;
+    }
+
+    .backdrop {
+        background-color: rgba(22, 25, 29, 0.75);
     }
 
     canvas {

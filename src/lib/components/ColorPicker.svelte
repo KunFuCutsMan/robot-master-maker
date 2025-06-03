@@ -1,6 +1,7 @@
 <script lang="ts">
     import { intToRGBA, type JimpInstance, type RGBAColor } from "jimp";
     import ColorChanger from "./ColorChanger.svelte";
+    import { openColorChangerModal } from "./modals/index.js";
 
     type Props = {
         jimpo: JimpInstance;
@@ -34,7 +35,10 @@
 </div>
 
 {#snippet colorButton(color: RGBAColor)}
-    <button aria-label="Click to modify color">
+    <button
+        aria-label="Click to modify color"
+        onclick={() => openColorChangerModal(jimpo, color)}
+    >
         <div
             class="square"
             style:--color={`rgb(${color.r}, ${color.g}, ${color.b}, ${color.a})`}
