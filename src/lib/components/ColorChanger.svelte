@@ -1,39 +1,27 @@
 <script lang="ts">
     import { rgbaToInt, type JimpInstance, type RGBAColor } from "jimp";
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
+    import { modals } from "svelte-modals";
+    import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
 
     type Props = {
-        jimpo: JimpInstance;
+        selectedPart: BaseImageKey;
         selectedColor: RGBAColor;
     };
 
-    let { jimpo, selectedColor }: Props = $props();
+    let { selectedPart, selectedColor }: Props = $props();
     let nesColors = controller.getNesColors();
 
     let colors = $derived.by(() => {
-        if (controller.isLoaded()) return [];
+        if (!controller.isLoaded()) return [];
 
         return nesColors.colors();
     });
 
     function changeColor(color: RGBAColor) {
-        for (const { x, y } of jimpo.scanIterator()) {
-            if (
-                jimpo.getPixelColor(x, y) ==
-                rgbaToInt(
-                    selectedColor.r,
-                    selectedColor.g,
-                    selectedColor.b,
-                    selectedColor.a
-                )
-            ) {
-                jimpo.setPixelColor(
-                    rgbaToInt(color.r, color.g, color.b, color.a),
-                    x,
-                    y
-                );
-            }
-        }
+        let thisPart = controller.getPart(selectedPart);
+        thisPart.colorSwap(selectedColor, color);
+        controller.drawRobotMaster();
     }
 </script>
 
@@ -49,7 +37,10 @@
     {@const color = `rgb(${c.r}, ${c.g}, ${c.b}, ${c.a})`}
     <button
         aria-label="Click to change to this color"
-        onclick={() => changeColor(c)}
+        onclick={() => {
+            changeColor(c);
+            modals.close();
+        }}
     >
         <div class="square" style:--color={color}></div>
     </button>

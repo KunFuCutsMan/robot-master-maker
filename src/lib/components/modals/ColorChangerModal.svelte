@@ -1,20 +1,22 @@
 <script lang="ts">
     import { modals, type ModalProps } from "svelte-modals";
     import ColorChanger from "../ColorChanger.svelte";
-    import type { JimpInstance, RGBAColor } from "jimp";
+    import type { RGBAColor } from "jimp";
+    import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
 
     type Props = {
-        jimpo: JimpInstance;
+        selectedPart: BaseImageKey;
         selectedColor: RGBAColor;
     };
 
-    let { isOpen, close, jimpo, selectedColor }: ModalProps & Props = $props();
+    let { isOpen, close, selectedPart, selectedColor }: ModalProps & Props =
+        $props();
 </script>
 
 {#if isOpen}
     <div role="dialog" class="modal">
         <section class="surface-0">
-            <ColorChanger {jimpo} {selectedColor} />
+            <ColorChanger {selectedPart} {selectedColor} />
             <button
                 aria-label="Close Dialog"
                 class="surface-1"

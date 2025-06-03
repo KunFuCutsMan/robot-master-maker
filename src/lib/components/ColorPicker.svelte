@@ -1,13 +1,14 @@
 <script lang="ts">
     import { intToRGBA, type JimpInstance, type RGBAColor } from "jimp";
-    import ColorChanger from "./ColorChanger.svelte";
     import { openColorChangerModal } from "./modals/index.js";
+    import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
 
     type Props = {
         jimpo: JimpInstance;
+        selectedPart: BaseImageKey;
     };
 
-    let { jimpo = $bindable<JimpInstance>() }: Props = $props();
+    let { jimpo = $bindable<JimpInstance>(), selectedPart }: Props = $props();
 
     let colors: RGBAColor[] = $derived.by(() => {
         if (!jimpo) return [];
@@ -37,20 +38,13 @@
 {#snippet colorButton(color: RGBAColor)}
     <button
         aria-label="Click to modify color"
-        onclick={() => openColorChangerModal(jimpo, color)}
+        onclick={() => openColorChangerModal(selectedPart, color)}
     >
         <div
             class="square"
             style:--color={`rgb(${color.r}, ${color.g}, ${color.b}, ${color.a})`}
         ></div>
     </button>
-{/snippet}
-
-{#snippet dialogContent()}
-    <!--
-        <ColorChanger {jimpo} selectedColor={color} />
-        -->
-    Dialog Content
 {/snippet}
 
 <style>

@@ -1,5 +1,5 @@
 import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js"
-import type { JimpInstance } from "jimp"
+import { rgbaToInt, type JimpInstance, type RGBAColor } from "jimp"
 import type { RobotMaster } from "./robotMasters.js"
 
 export class RobotMasterParts {
@@ -30,5 +30,13 @@ export class Part {
 
     constructor(key: BaseImageKey) {
         this.type = key
+    }
+
+    colorSwap(selected: RGBAColor, newColor: RGBAColor) {
+        for (const { x, y } of this.img!.scanIterator()) {
+            if ( this.img!.getPixelColor(x, y) == rgbaToInt( selected.r, selected.g, selected.b, selected.a) ) {
+                this.img!.setPixelColor( rgbaToInt(newColor.r, newColor.g, newColor.b, newColor.a), x, y );
+            }
+        }
     }
 }

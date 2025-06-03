@@ -1,7 +1,8 @@
 import { modals } from "svelte-modals";
 import ColorChangerModal from "./ColorChangerModal.svelte";
-import type { JimpInstance, RGBAColor } from "jimp";
+import type { RGBAColor } from "jimp";
+import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";
 
-export function openColorChangerModal(jimpo: JimpInstance, selectedColor: RGBAColor) {
-    modals.open( ColorChangerModal, { jimpo, selectedColor } )
+export function openColorChangerModal(selectedPart: BaseImageKey, selectedColor: RGBAColor) {
+    modals.open( ColorChangerModal, { selectedPart, selectedColor } )
 }

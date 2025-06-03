@@ -55,7 +55,10 @@
         />
     </div>
     <div>
-        <ColorPicker jimpo={thisPart.img as JimpInstance} />
+        <ColorPicker
+            jimpo={thisPart.img as JimpInstance}
+            selectedPart={thisPart.type}
+        />
     </div>
 </article>
 
