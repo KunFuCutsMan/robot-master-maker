@@ -14,6 +14,7 @@
     <div class="flex">
         <canvas width="64" height="64" bind:this={canvas}></canvas>
         <ul class="parts">
+            <li><PartTag thisPart={controller.rmParts.head} /></li>
             <li><PartTag thisPart={controller.rmParts.leftArm} /></li>
             <li><PartTag thisPart={controller.rmParts.rightArm} /></li>
             <li><PartTag thisPart={controller.rmParts.pants} /></li>

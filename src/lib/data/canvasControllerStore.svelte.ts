@@ -61,6 +61,14 @@ class CanvasController  {
             1,
             0
         );
+
+        this.rmParts.head.x = 22
+        this.rmParts.head.y = 6
+        this.rmParts.head.img = this.imageLoader.getCroppedPart(
+            "Head",
+            1,
+            0
+        )
     }
 
     private draw(instance: JimpInstance, dx: number, dy: number) {
@@ -80,6 +88,7 @@ class CanvasController  {
 
     drawRobotMaster() {
         const partsInOrder = [
+            this.rmParts.getPart('Head'),
             this.rmParts.getPart('Left Arm'),
             this.rmParts.getPart('Left Leg'),
             this.rmParts.getPart('Pants'),

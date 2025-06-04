@@ -4,10 +4,12 @@ import rightArm from '$lib/assets/right arm.png'
 import leftLeg from '$lib/assets/left leg.png'
 import rightLeg from '$lib/assets/right leg.png'
 import pants from '$lib/assets/pants.png'
+import head from '$lib/assets/head.png'
 
 export type BaseImageKey = 'Pants'
     | 'Left Leg' | 'Right Leg'
     | 'Left Arm' | 'Right Arm'
+    | 'Head'
 
 export class ImagePartLoader {
 
@@ -16,6 +18,7 @@ export class ImagePartLoader {
     PantsImage: SpriteMap
     LeftLegImage: SpriteMap
     RightLegImage: SpriteMap
+    HeadImage: SpriteMap
 
     imagesLoaded = $state(false)
 
@@ -25,6 +28,7 @@ export class ImagePartLoader {
         this.LeftLegImage = new SpriteMap(leftLeg, 3, 2)
         this.RightLegImage = new SpriteMap(rightLeg, 3, 2)
         this.PantsImage = new SpriteMap(pants, 3, 2)
+        this.HeadImage = new SpriteMap(head, 3, 3)
     }
 
     async loadImages() {
@@ -34,6 +38,7 @@ export class ImagePartLoader {
             this.LeftLegImage.loadImage(),
             this.RightLegImage.loadImage(),
             this.PantsImage.loadImage(),
+            this.HeadImage.loadImage()
         ]
 
         return Promise.all( promises ).then( () => { this.imagesLoaded = true } )
@@ -58,6 +63,8 @@ export class ImagePartLoader {
                 return this.RightLegImage.getCroppedPart(xPos, yPos)
             case "Pants":
                 return this.PantsImage.getCroppedPart(xPos, yPos)
+            case "Head":
+                return this.HeadImage.getCroppedPart(xPos, yPos)
         }
     }
 

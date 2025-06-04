@@ -9,6 +9,7 @@ export class RobotMasterParts {
     pants = new Part("Pants")
     leftLeg = new Part("Left Leg")
     rightLeg = new Part("Right Leg")
+    head = new Part("Head")
 
     getPart( key: BaseImageKey ): Part {
         switch (key) {
@@ -17,6 +18,7 @@ export class RobotMasterParts {
             case 'Pants': return this.pants
             case 'Left Leg': return this.leftLeg
             case 'Right Leg': return this.rightLeg
+            case 'Head': return this.head
         }
     }
 }
