@@ -1,4 +1,4 @@
-import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js"
+import type { BaseImageKey, ImagePartLoader } from "$lib/image/PartComponents.svelte.js"
 import { rgbaToInt, type JimpInstance, type RGBAColor } from "jimp"
 import type { RobotMaster } from "./robotMasters.js"
 
@@ -34,6 +34,13 @@ export class Part {
         this.type = key
     }
 
+    setup( imageLoader: ImagePartLoader ) {
+        let {x, y} = initialPositions[this.type]
+        this.x = x
+        this.y = y
+        this.img = imageLoader.getCroppedPart(this.type, 1, 0)
+    }
+
     colorSwap(selected: RGBAColor, newColor: RGBAColor) {
         for (const { x, y } of this.img!.scanIterator()) {
             if ( this.img!.getPixelColor(x, y) == rgbaToInt( selected.r, selected.g, selected.b, selected.a) ) {
@@ -47,4 +54,13 @@ export class Part {
 		this.img = undefined;
 		this.img = tmp;
     }
+}
+
+const initialPositions: Record<BaseImageKey, {x: number, y: number}> = {
+    "Pants": { x: 24, y: 32 },
+    "Left Leg": { x: 10, y: 34 },
+    "Right Leg": { x: 34, y: 34 },
+    "Left Arm": { x: 12, y: 22 },
+    "Right Arm": { x: 36, y: 22 },
+    "Head": { x: 22, y: 6 }
 }

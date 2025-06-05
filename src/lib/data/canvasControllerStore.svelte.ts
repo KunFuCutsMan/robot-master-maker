@@ -22,29 +22,7 @@ class CanvasController  {
             this.nesColors.loadColors()
         ])
 
-        this.rmParts.leftArm.x = 12
-        this.rmParts.leftArm.y = 22
-        this.rmParts.leftArm.img = this.imageLoader.getCroppedPart("Left Arm", 1, 0);
-
-        this.rmParts.rightArm.x = 36
-        this.rmParts.rightArm.y = 22
-        this.rmParts.rightArm.img = this.imageLoader.getCroppedPart("Right Arm", 1, 0);
-
-        this.rmParts.pants.x = 24
-        this.rmParts.pants.y = 32
-        this.rmParts.pants.img = this.imageLoader.getCroppedPart( "Pants", 1, 0);
-
-        this.rmParts.leftLeg.x = 10
-        this.rmParts.leftLeg.y = 34
-        this.rmParts.leftLeg.img = this.imageLoader.getCroppedPart("Left Leg", 1, 0);
-
-        this.rmParts.rightLeg.x = 34
-        this.rmParts.rightLeg.y = 34
-        this.rmParts.rightLeg.img = this.imageLoader.getCroppedPart("Right Leg", 1, 0);
-
-        this.rmParts.head.x = 22
-        this.rmParts.head.y = 6
-        this.rmParts.head.img = this.imageLoader.getCroppedPart("Head", 1, 0);
+        this.getPartsInOrder().forEach( p => p.setup(this.imageLoader) )
     }
 
     private draw(instance: JimpInstance, dx: number, dy: number) {
@@ -63,18 +41,9 @@ class CanvasController  {
     }
 
     drawRobotMaster() {
-        const partsInOrder = [
-            this.rmParts.getPart('Head'),
-            this.rmParts.getPart('Left Arm'),
-            this.rmParts.getPart('Left Leg'),
-            this.rmParts.getPart('Pants'),
-            this.rmParts.getPart('Right Arm'),
-            this.rmParts.getPart('Right Leg'),
-        ]
-
         this.clearCanvas()
 
-        partsInOrder.forEach(p => {
+        this.getPartsInOrder().forEach(p => {
             if ( p.img )
                 this.draw(p.img, p.x, p.y)
         });
@@ -94,6 +63,17 @@ class CanvasController  {
 
     getCroppedPart(key: BaseImageKey, xPos: number, yPos: number) {
         return this.imageLoader.getCroppedPart(key, xPos, yPos)
+    }
+
+    getPartsInOrder() {
+        return [
+            this.rmParts.getPart('Head'),
+            this.rmParts.getPart('Left Arm'),
+            this.rmParts.getPart('Right Arm'),
+            this.rmParts.getPart('Pants'),
+            this.rmParts.getPart('Left Leg'),
+            this.rmParts.getPart('Right Leg'),
+        ]
     }
 }
 
