@@ -43,7 +43,7 @@ class CanvasController  {
     drawRobotMaster() {
         this.clearCanvas()
 
-        this.getPartsInOrder().forEach(p => {
+        this.getPartsInOrder().reverse().forEach(p => {
             if ( p.img )
                 this.draw(p.img, p.x, p.y)
         });
