@@ -10,6 +10,7 @@ export class RobotMasterParts {
     leftLeg = new Part("Left Leg")
     rightLeg = new Part("Right Leg")
     head = new Part("Head")
+    chest = new Part("Chest")
 
     getPart( key: BaseImageKey ): Part {
         switch (key) {
@@ -19,6 +20,7 @@ export class RobotMasterParts {
             case 'Left Leg': return this.leftLeg
             case 'Right Leg': return this.rightLeg
             case 'Head': return this.head
+            case "Chest": return this.chest
         }
     }
 }
@@ -62,5 +64,6 @@ const initialPositions: Record<BaseImageKey, {x: number, y: number}> = {
     "Right Leg": { x: 34, y: 34 },
     "Left Arm": { x: 12, y: 22 },
     "Right Arm": { x: 36, y: 22 },
-    "Head": { x: 22, y: 6 }
+    "Head": { x: 22, y: 6 },
+    "Chest": { x: 24, y: 26}
 }

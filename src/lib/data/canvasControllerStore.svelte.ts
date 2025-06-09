@@ -70,6 +70,7 @@ class CanvasController  {
             this.rmParts.getPart('Head'),
             this.rmParts.getPart('Left Arm'),
             this.rmParts.getPart('Right Arm'),
+            this.rmParts.getPart('Chest'),
             this.rmParts.getPart('Pants'),
             this.rmParts.getPart('Left Leg'),
             this.rmParts.getPart('Right Leg'),
