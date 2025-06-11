@@ -4,15 +4,35 @@
     import { controller } from "$lib/data/canvasControllerStore.svelte.js";
     import { Modals } from "svelte-modals";
     import { onMount } from "svelte";
+    import helpSVG from "$lib/assets/svg/help.svg?raw";
+    import outputSVG from "$lib/assets/svg/output.svg?raw";
 
     let canvas: HTMLCanvasElement;
+
+    let actionList: { icon: string; desc: string; action: () => void }[] = [
+        { icon: helpSVG, desc: "Help", action: () => {} },
+        { icon: outputSVG, desc: "Export Robot Master", action: () => {} },
+    ];
 
     onMount(async () => await controller.setup(canvas));
 </script>
 
 <div class="rmm-container">
     <div class="flex">
-        <canvas width="64" height="64" bind:this={canvas}></canvas>
+        <div>
+            <canvas width="64" height="64" bind:this={canvas}></canvas>
+            <ul class="button-list">
+                {#each actionList as button}
+                    <li>
+                        {@render buttonWithIcon(
+                            button.icon,
+                            button.desc,
+                            button.action
+                        )}
+                    </li>
+                {/each}
+            </ul>
+        </div>
         <ul class="parts">
             {#each controller.getPartsInOrder() as part}
                 <li><PartTag thisPart={part} /></li>
@@ -20,6 +40,12 @@
         </ul>
     </div>
 </div>
+
+{#snippet buttonWithIcon(icon: string, desc: string, action: () => void)}
+    <button onclick={action} aria-label={desc} class="surface-1">
+        {@html icon}
+    </button>
+{/snippet}
 
 <Modals>
     {#snippet backdrop({ close })}
@@ -41,7 +67,7 @@
         gap: var(--size-2);
     }
 
-    .flex > :not(canvas) {
+    .flex > * {
         flex-grow: 1;
     }
 
@@ -50,9 +76,9 @@
     }
 
     canvas {
-        display: inline-block;
+        display: block;
         width: min(100%, var(--size-15));
-        height: min(100%, var(--size-15));
+        aspect-ratio: var(--ratio-square);
         image-rendering: pixelated;
         background-color: rebeccapurple;
         margin-block: var(--size-2);
@@ -63,6 +89,18 @@
         list-style: none;
     }
 
+    .button-list {
+        display: flex;
+        justify-content: center;
+        gap: var(--size-2);
+    }
+
+    button {
+        border: 0;
+        cursor: pointer;
+        padding: var(--size-1);
+        border-radius: var(--radius-2);
+    }
     @container container ( max-width: 40rem ) {
         .flex {
             flex-direction: column;

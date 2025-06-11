@@ -50,7 +50,7 @@
 <style>
     .flex {
         display: flex;
-        gap: 0.5rem;
+        gap: var(--size-2);
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
