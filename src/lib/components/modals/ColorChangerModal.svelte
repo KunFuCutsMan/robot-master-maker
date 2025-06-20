@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { modals, type ModalProps } from "svelte-modals";
+    import { type ModalProps } from "svelte-modals";
     import ColorChanger from "../ColorChanger.svelte";
     import type { RGBAColor } from "jimp";
     import type { BaseImageKey } from "$lib/image/PartComponents.svelte.js";

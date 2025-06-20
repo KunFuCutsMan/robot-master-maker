@@ -6,11 +6,16 @@
     import { onMount } from "svelte";
     import helpSVG from "$lib/assets/svg/help.svg?raw";
     import outputSVG from "$lib/assets/svg/output.svg?raw";
+    import { openInformationModal } from "./modals/index.js";
 
     let canvas: HTMLCanvasElement;
 
     let actionList: { icon: string; desc: string; action: () => void }[] = [
-        { icon: helpSVG, desc: "Help", action: () => {} },
+        {
+            icon: helpSVG,
+            desc: "Help",
+            action: () => openInformationModal(),
+        },
         { icon: outputSVG, desc: "Export Robot Master", action: () => {} },
     ];
 
