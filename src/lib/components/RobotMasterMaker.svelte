@@ -6,7 +6,7 @@
     import { onMount } from "svelte";
     import helpSVG from "$lib/assets/svg/help.svg?raw";
     import outputSVG from "$lib/assets/svg/output.svg?raw";
-    import { openInformationModal } from "./modals/index.js";
+    import { openExportModal, openInformationModal } from "./modals/index.js";
 
     let canvas: HTMLCanvasElement;
 
@@ -16,7 +16,11 @@
             desc: "Help",
             action: () => openInformationModal(),
         },
-        { icon: outputSVG, desc: "Export Robot Master", action: () => {} },
+        {
+            icon: outputSVG,
+            desc: "Export Robot Master",
+            action: () => openExportModal(),
+        },
     ];
 
     onMount(async () => await controller.setup(canvas));
