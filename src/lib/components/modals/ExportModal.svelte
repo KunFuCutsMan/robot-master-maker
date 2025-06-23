@@ -130,4 +130,10 @@
         justify-content: space-around;
         gap: var(--size-2);
     }
+
+    @media (max-width: 768px) {
+        .content {
+            grid-template-columns: auto;
+        }
+    }
 </style>
