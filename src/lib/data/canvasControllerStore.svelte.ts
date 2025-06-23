@@ -1,7 +1,7 @@
 import { NESColors } from "$lib/image/NESColors.svelte.js";
 import { ImagePartLoader, type BaseImageKey } from "$lib/image/PartComponents.svelte.js";
 import { RobotMasterParts } from "./robotMasterParts.svelte.js";
-import type { JimpInstance } from "jimp";
+import { Jimp, type JimpInstance } from "jimp";
 
 class CanvasController  {
 
@@ -75,6 +75,12 @@ class CanvasController  {
             this.rmParts.getPart('Left Leg'),
             this.rmParts.getPart('Right Leg'),
         ]
+    }
+
+    async cropRobotMaster() {
+        const jimpo: JimpInstance = await Jimp.fromBitmap( this.ctx!.getImageData(0, 0, this.canvasWidth, this.canvasHeight) )
+        const cropped = await jimpo.autocrop({ leaveBorder: 1 })
+        return cropped as JimpInstance
     }
 }
 
