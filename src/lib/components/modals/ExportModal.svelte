@@ -36,6 +36,11 @@
         link.click();
         link.remove();
     }
+
+    function copyRobotMasterWidget() {
+        navigator.clipboard.writeText(widgetHTML);
+        alert("Widget was copied!");
+    }
 </script>
 
 {#if isOpen}
@@ -53,7 +58,10 @@
                 <div class="column">
                     <div>{@html widgetHTML}</div>
 
-                    <button class="surface-1 input-bg download-button">
+                    <button
+                        class="surface-1 input-bg download-button"
+                        onclick={copyRobotMasterWidget}
+                    >
                         Click here to copy the widget
                     </button>
                 </div>
